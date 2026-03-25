@@ -10,6 +10,7 @@ class AppConstants {
   static const int defaultSessionsBeforeLongBreak = 4;
 
   // Storage keys
+  static const String onboardingCompleteKey = 'onboarding_complete';
   static const String userTokenKey = 'user_token';
   static const String userDataKey = 'user_data';
   static const String pomodoroSettingsKey = 'pomodoro_settings';

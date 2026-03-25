@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flashcard/core/constants/app_constants.dart';
 import 'package:flashcard/features/auth/presentation/pages/login_page.dart';
 import 'package:flashcard/features/auth/presentation/pages/register_page.dart';
+import 'package:flashcard/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flashcard/features/pomodoro/presentation/pages/pomodoro_page.dart';
 import 'package:flashcard/features/task_management/presentation/pages/task_list_page.dart';
 import 'package:flashcard/features/task_management/presentation/pages/task_create_page.dart';
@@ -13,9 +16,26 @@ import 'package:flashcard/features/home/presentation/pages/home_page.dart';
 class AppRouter {
   AppRouter._();
 
+  static bool _onboardingComplete = false;
+
+  static Future<void> initialize() async {
+    final prefs = await SharedPreferences.getInstance();
+    _onboardingComplete =
+        prefs.getBool(AppConstants.onboardingCompleteKey) ?? false;
+  }
+
   static final GoRouter router = GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/onboarding',
+    redirect: (context, state) {
+      final isOnboarding = state.uri.toString() == '/onboarding';
+      if (_onboardingComplete && isOnboarding) return '/home';
+      return null;
+    },
     routes: [
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingPage(),
+      ),
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginPage(),

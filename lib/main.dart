@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flashcard/core/di/injection_container.dart' as di;
 import 'package:flashcard/core/router/app_router.dart';
 import 'package:flashcard/core/theme/app_theme.dart';
-
 import 'package:flashcard/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flashcard/features/pomodoro/presentation/bloc/pomodoro_bloc.dart';
 import 'package:flashcard/features/pomodoro/presentation/bloc/pomodoro_event.dart';
@@ -19,6 +18,7 @@ import 'package:flashcard/features/cloud_sync/presentation/bloc/sync_event.dart'
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  await AppRouter.initialize();
   runApp(const FlashcardApp());
 }
 
