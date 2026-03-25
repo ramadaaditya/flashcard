@@ -49,7 +49,9 @@ class FlashcardApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Flashcard',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
+        theme: ThemeData(
+          fontFamily: 'Rubik'
+        ),
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
         routerConfig: AppRouter.router,
